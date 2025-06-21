@@ -277,22 +277,22 @@ master_list = [l_flicker,l_repeats,l_source,l_rabbits,l_copies,l_etbs,l_math]
 
 # make table columns with headers and make them pretty
 table = Table(title="Hare Apparent Trigger Log")
-table.add_column("Flicker", justify="left", style="magenta")
-table.add_column("Repeat", justify="left", style="magenta")
-table.add_column("Source", justify="left", style="cyan")
-table.add_column("Buns", justify="left", style="green")
-table.add_column("Copies", justify="left", style="green")
-table.add_column("ETBs", justify="left", style="green")
-table.add_column("Math", justify="left", style="yellow")
+table.add_column("Flicker", justify="left", style="magenta1")
+table.add_column("Repeat", justify="left", style="magenta1")
+table.add_column("Source", justify="left", style="cyan1")
+table.add_column("Buns", justify="left", style="green1")
+table.add_column("Copies", justify="left", style="green1")
+table.add_column("ETBs", justify="left", style="green1")
+table.add_column("Math", justify="left", style="gold1")
 
 # make the rows of the table
 for row in zip(*master_list):
     table.add_row(*row)
 
 # print output in the console
-p_rabbits = Text.assemble(("There were ","bold"),(str(rabbits)+" 1/1 white Rabbit Tokens","bold green"),(" made","bold"))
-p_copies = Text.assemble(("There were ","bold"),(str(copies)+" 0/1 white Illusion Copy Tokens","bold green"),(" made","bold"))
-p_etbs = Text.assemble(("There were ","bold"),(str(etbs)+" creatures that entered the battlefield","bold green"),(" this turn","bold"))
+p_rabbits = Text.assemble(("There were ","bold"),(str(rabbits)+" 1/1 white Rabbit Tokens","bold green1"),(" made","bold"))
+p_copies = Text.assemble(("There were ","bold"),(str(copies)+" 0/1 white Illusion Copy Tokens","bold green1"),(" made","bold"))
+p_etbs = Text.assemble(("There were ","bold"),(str(etbs)+" creatures that entered the battlefield","bold green1"),(" this turn","bold"))
 
 console.print(table)
 console.print(p_rabbits)
