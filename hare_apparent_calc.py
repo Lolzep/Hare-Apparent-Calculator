@@ -11,29 +11,67 @@ l_rabbits = []
 l_copies = []
 l_etbs = []
 
-apparents = int(input("Non-Token Hare Apparents in play being flickered: "))
+# User input w/ input validation
+def enter_data(message: str, typ: type):
+    while True:
+        try:
+            v = typ(input(message))
+            if (isinstance(v, int) or isinstance(v, float)) and v < 0:
+                raise ValueError
+        except ValueError:
+            print(f"Thats not an {typ}! or you have entered a negative")
+            continue
+        else:
+            break
+    return v
 
-total = int(input("Total Hare Apparents in play (including token copies): "))
-illusions = total - apparents
+apparents = enter_data("Non-Token Hare Apparents in play being flickered: ", int)
 
-#amount = input("Are we flickering all Hare Apparents or just one? (All/1): ")
-preston = input("Is Preston in play for copy generation? (T/F): ")
-flicker = int(input("Amount of times to flicker: "))
-hare_repeats = int(input("How many times is Hare Apparent's triggers being repeated?: "))
-preston_repeats = int(input("How many times is Preston's trigger being repeated?: "))
+while True:
+    try:
+        total = enter_data("Total Hare Apparents in play (including token copies): ", int)
+        illusions = total - apparents
+        if illusions < 0:
+            raise ValueError
+        break
+    except ValueError:
+        print("The amount of Hare Apparents being flickered must be less than the total amount of Hare Apparents. You input "+str(apparents)+" to be flickered which is greater than "+str(total)+" as the total.")
+        continue
 
+while True:
+    try:
+        preston = input("Is Preston in play for copy generation? (T/F): ")
+        if preston == "T":
+            preston == True
+            break
+        elif preston == "F":
+            preston == False
+            break
+        else:
+            raise ValueError
+    except ValueError:
+        print("Please input 'T' or 'F'")
+        continue
+
+flicker = enter_data("Amount of times to flicker: ", int)
+hare_repeats = enter_data("How many times is Hare Apparent's triggers being repeated?: ", int)
+preston_repeats = enter_data("How many times is Preston's trigger being repeated?: ", int)
+
+# Initial values for everything that enters should be 0
 rabbits = 0
 copies = 0
 etbs = 0
-i = 0
-j = 0
-k = 0
 
-# Order of Triggers
+# Initial values for "counting" the amount copies and triggers happening
+i = 0 # counts amount of flickers
+j = 0 # counts amount of hare_repeats
+k = 0 # counts amount of preston_repeats
+
+# To start the flicker, the amount being flickered should remain constant as what was inputted for "apparents"
 real_apparents = apparents
 # Flicker X amount of times
 while i < flicker:
-# Hare Apparent leaves and enters X amount of times and repeated Y amount of times (if hare_repeats > 0)
+# Hare Apparent leaves and enters X amount of times (flicker). There's only 1 ETB trigger per flicker. hare_repeats included to help visualize.
     if hare_repeats > 0:
         for j in range(hare_repeats+1):
             if j == min(range(hare_repeats+1)):
@@ -67,7 +105,7 @@ while i < flicker:
         l_copies.append("0")
         l_etbs.append(str(c_etbs))
 
-# Hare Apparent's ETB triggers X amount of times and repeated Y amount of times (if hare_repeats > 0)
+# Hare Apparent's ETB triggers X amount of times (flicker), repeated Y amount of times (if hare_repeats > 0), and Z copies are made
     if hare_repeats > 0:
         for j in range(hare_repeats+1):
             rabbits += (real_apparents) * (apparents + illusions - 1)
