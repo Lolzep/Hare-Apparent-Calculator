@@ -31,6 +31,7 @@ However, the directions below are faster after these initial setup instructions.
 6. Open `hare_apparent_calc.py` and select "Termux" when asked what app to open with. Then select "Open Directory".</br>
 7. Run the file with the command and enjoy!:</br>
 `python hare_apparent_calc.py`</br>
+*Remember to exit the Termux session from the notification panel when done*
 ## iPhone</br>
 *Warning: I have not tested this because I don't have an iPhone*
 1. Download `hare_apparent_calc.py` from this repo and move to wherever you'd like to keep it</br>
