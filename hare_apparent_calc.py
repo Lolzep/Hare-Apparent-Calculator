@@ -12,6 +12,7 @@ l_repeats = []
 l_rabbits = []
 l_copies = []
 l_etbs = []
+l_math = []
 
 # User input validation
 def enter_data(message: str, typ: type):
@@ -96,10 +97,11 @@ while i < flicker:
                     l_repeats.append("Original")
                 else:
                     l_repeats.append("Repeat "+ str(j))
-                l_source.append("HA ETB")
+                l_source.append("HA ETBs")
                 l_rabbits.append("0")
                 l_copies.append("0")
                 l_etbs.append(str(c_etbs))
+                l_math.append(str(real_apparents))
             else:
                 etbs += 0
                 c_etbs = 0
@@ -113,10 +115,11 @@ while i < flicker:
             l_repeats.append("Original")
         else:
             l_repeats.append("Repeat "+ str(j))
-        l_source.append("HA ETB")
+        l_source.append("HA ETBs")
         l_rabbits.append("0")
         l_copies.append("0")
         l_etbs.append(str(c_etbs))
+        l_math.append(str(real_apparents))
 
 # Hare Apparent's ETB triggers X amount of times (flicker), repeated Y amount of times (if hare_repeats > 0), and Z copies are made
     if hare_repeats > 0:
@@ -132,10 +135,11 @@ while i < flicker:
                 l_repeats.append("Original")
             else:
                 l_repeats.append("Repeat "+ str(j))
-            l_source.append("HA Trigger")
+            l_source.append("HAs")
             l_rabbits.append(str(c_rabbits))
             l_copies.append("0")
             l_etbs.append(str(c_etbs))
+            l_math.append(f"{real_apparents}*({apparents}+{illusions}-1)")
 
         if preston == True and preston_repeats > 0:
             for k in range(preston_repeats+1):
@@ -150,10 +154,11 @@ while i < flicker:
                     l_repeats.append("Original")
                 else:
                     l_repeats.append("Repeat "+ str(k))
-                l_source.append("P Trigger")
+                l_source.append("Preston")
                 l_rabbits.append("0")
                 l_copies.append(str(c_copies))
                 l_etbs.append(str(c_etbs))
+                l_math.append(f"{real_apparents}")
         elif preston == True:
             copies += real_apparents
             c_copies = real_apparents
@@ -166,10 +171,11 @@ while i < flicker:
                 l_repeats.append("Original")
             else:
                 l_repeats.append("Repeat "+ str(k))
-            l_source.append("P Trigger")
+            l_source.append("Preston")
             l_rabbits.append("0")
             l_copies.append(str(c_copies))
             l_etbs.append(str(c_etbs))
+            l_math.append(f"{real_apparents}")
 
     else:
         rabbits += (real_apparents) * (apparents + illusions - 1)
@@ -183,10 +189,11 @@ while i < flicker:
             l_repeats.append("Original")
         else:
             l_repeats.append("Repeat "+ str(j))
-        l_source.append("HA Trigger")
+        l_source.append("HAs")
         l_rabbits.append(str(c_rabbits))
         l_copies.append("0")
         l_etbs.append(str(c_etbs))
+        l_math.append(f"{real_apparents}*({apparents}+{illusions}-1)")
 
         if preston == True and preston_repeats > 0:
             for k in range(preston_repeats+1):
@@ -201,10 +208,11 @@ while i < flicker:
                     l_repeats.append("Original")
                 else:
                     l_repeats.append("Repeat "+ str(k))
-                l_source.append("P Trigger")
+                l_source.append("Preston")
                 l_rabbits.append("0")
                 l_copies.append(str(c_copies))
                 l_etbs.append(str(c_etbs))
+                l_math.append(f"{real_apparents}")
         elif preston == True:
             copies += real_apparents
             c_copies = real_apparents
@@ -217,10 +225,11 @@ while i < flicker:
                 l_repeats.append("Original")
             else:
                 l_repeats.append("Repeat "+ str(k))
-            l_source.append("P Trigger")
+            l_source.append("Preston")
             l_rabbits.append("0")
             l_copies.append(str(c_copies))
             l_etbs.append(str(c_etbs))
+            l_math.append(f"{real_apparents}")
 
 # Preston's ETB triggers X amount of times and repeated Y amount of times (if preston_repeats > 0)
     if preston == True:
@@ -238,10 +247,11 @@ while i < flicker:
                     l_repeats.append("Original")
                 else:
                     l_repeats.append("Repeat "+ str(j))
-                l_source.append("Copy Triggers")
+                l_source.append("Copies")
                 l_rabbits.append(str(c_rabbits))
                 l_copies.append("0")
                 l_etbs.append(str(c_etbs))
+                l_math.append(f"{c_copies}*({apparents}+{illusions}-1)")
 
         else:
             rabbits += (c_copies) * (apparents + illusions - 1)
@@ -255,23 +265,25 @@ while i < flicker:
                 l_repeats.append("Original")
             else:
                 l_repeats.append("Repeat "+ str(j))
-            l_source.append("Copy Triggers")
+            l_source.append("Copies")
             l_rabbits.append(str(c_rabbits))
             l_copies.append("0")
-            l_etbs.append(str(c_etbs))  
+            l_etbs.append(str(c_etbs))
+            l_math.append(f"{c_copies}*({apparents}+{illusions}-1)")
     i += 1
 
 # append all lists into a list of lists where each list is a column in the final table
-master_list = [l_flicker,l_repeats,l_source,l_rabbits,l_copies,l_etbs]
+master_list = [l_flicker,l_repeats,l_source,l_rabbits,l_copies,l_etbs,l_math]
 
 # make table columns with headers and make them pretty
 table = Table(title="Hare Apparent Trigger Log")
 table.add_column("Flicker", justify="left", style="magenta")
 table.add_column("Repeat", justify="left", style="magenta")
 table.add_column("Source", justify="left", style="cyan")
-table.add_column("Rabbits", justify="left", style="green")
+table.add_column("Buns", justify="left", style="green")
 table.add_column("Copies", justify="left", style="green")
 table.add_column("ETBs", justify="left", style="green")
+table.add_column("Math", justify="left", style="yellow")
 
 # make the rows of the table
 for row in zip(*master_list):
