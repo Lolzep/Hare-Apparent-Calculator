@@ -3,6 +3,8 @@
 
 Want to make hundreds or even thousands of rabbits but don't want to be that guy at the commander pod taking 30 minutes to calculate how much is made after multiple flicker and repeat triggers? Then this calculator is for you!
 
+![Example](/example.png "Example")
+
 # **Installing/Running**
 Very verbose to help out all the non-nerds out there.
 ## Desktop (Windows, Mac, Linux)</br>
