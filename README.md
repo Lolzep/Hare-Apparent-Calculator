@@ -39,9 +39,8 @@ However, the directions below are faster after these initial setup instructions.
 `apk add python3` *Installs Python (Fair warning: ~600 MB of space)*</br>
 `apk add py3-pip` *Installs pip which Python uses to install dependency packages*</br>
 `python3 -m pip install rich` *Used to display a pretty output in the terminal*</br>
-5. Exit iSH Shell</br>
-5. Open Apple's file manager and navigate to where you downloaded `hare_apparent_calc.py`</br>
-*More advanced users, change the directory using `cd` to wherever you have downloaded `hare_apparent_calc.py` and go to Step 7.*</br>
-6. Open `hare_apparent_calc.py` and select "iSH Shell" when asked what app to open with.</br>
+`mkdir app_dir` *Makes a directory which we will then use...*</br>
+`mount -t ios . app_dir` *...to find our file we downloaded*</br>
+5. The last command should open up the GUI to choose a directory from the Files app. Navigate to the directory where `hare_apparent_calc.py` is and select it.</br>
 7. Run the file with the command and enjoy!:</br>
 `python3 hare_apparent_calc.py`</br>
