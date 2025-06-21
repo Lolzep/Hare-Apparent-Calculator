@@ -2,6 +2,8 @@
 from rich.console import Console
 from rich.table import Table
 from rich.text import Text
+console = Console()
+text = Text()
 
 # make all lists, each is a column in the final log table
 l_flicker =[]
@@ -11,7 +13,7 @@ l_rabbits = []
 l_copies = []
 l_etbs = []
 
-# User input w/ input validation
+# User input validation
 def enter_data(message: str, typ: type):
     while True:
         try:
@@ -25,6 +27,7 @@ def enter_data(message: str, typ: type):
             break
     return v
 
+# User input
 apparents = enter_data("Non-Token Hare Apparents in play being flickered: ", int)
 
 while True:
@@ -42,10 +45,10 @@ while True:
     try:
         preston = input("Is Preston in play for copy generation? (T/F): ")
         if preston == "T":
-            preston == True
+            preston = True
             break
         elif preston == "F":
-            preston == False
+            preston = False
             break
         else:
             raise ValueError
@@ -56,6 +59,16 @@ while True:
 flicker = enter_data("Amount of times to flicker: ", int)
 hare_repeats = enter_data("How many times is Hare Apparent's triggers being repeated?: ", int)
 preston_repeats = enter_data("How many times is Preston's trigger being repeated?: ", int)
+
+# Prints an explanation of the inputs
+console.print("")
+console.print(f"[white][bold]{apparents} Hare Apparents are flickering {flicker} time(s) with {total} Hare Apparents total in play[/bold][/white]")
+if preston == True:
+    console.print(f"[white][bold]Preston is in play to generate copies[/bold][/white]")
+if hare_repeats > 0:
+    console.print(f"[white][bold]The amount of Hare Apparent repeat triggers is {hare_repeats}[/bold][/white]")
+if preston_repeats > 0:
+    console.print(f"[white][bold]The amount of Preston repeat triggers is {preston_repeats}[/bold][/white]")
 
 # Initial values for everything that enters should be 0
 rabbits = 0
@@ -124,7 +137,7 @@ while i < flicker:
             l_copies.append("0")
             l_etbs.append(str(c_etbs))
 
-        if preston == "T" and preston_repeats > 0:
+        if preston == True and preston_repeats > 0:
             for k in range(preston_repeats+1):
                 copies += real_apparents
                 c_copies = real_apparents
@@ -141,7 +154,7 @@ while i < flicker:
                 l_rabbits.append("0")
                 l_copies.append(str(c_copies))
                 l_etbs.append(str(c_etbs))
-        elif preston == "T":
+        elif preston == True:
             copies += real_apparents
             c_copies = real_apparents
 
@@ -175,7 +188,7 @@ while i < flicker:
         l_copies.append("0")
         l_etbs.append(str(c_etbs))
 
-        if preston == "T" and preston_repeats > 0:
+        if preston == True and preston_repeats > 0:
             for k in range(preston_repeats+1):
                 copies += real_apparents
                 c_copies = real_apparents
@@ -192,7 +205,7 @@ while i < flicker:
                 l_rabbits.append("0")
                 l_copies.append(str(c_copies))
                 l_etbs.append(str(c_etbs))
-        elif preston == "T":
+        elif preston == True:
             copies += real_apparents
             c_copies = real_apparents
 
@@ -210,7 +223,7 @@ while i < flicker:
             l_etbs.append(str(c_etbs))
 
 # Preston's ETB triggers X amount of times and repeated Y amount of times (if preston_repeats > 0)
-    if preston == "T":
+    if preston == True:
         apparents += c_copies * (hare_repeats + 1)
         if hare_repeats > 0:
             for j in range(hare_repeats+1):
@@ -265,8 +278,6 @@ for row in zip(*master_list):
     table.add_row(*row)
 
 # print output in the console
-console = Console()
-text = Text()
 p_rabbits = Text.assemble(("There were ","bold"),(str(rabbits)+" 1/1 white Rabbit Tokens","bold green"),(" made","bold"))
 p_copies = Text.assemble(("There were ","bold"),(str(copies)+" 0/1 white Illusion Copy Tokens","bold green"),(" made","bold"))
 p_etbs = Text.assemble(("There were ","bold"),(str(etbs)+" creatures that entered the battlefield","bold green"),(" this turn","bold"))
