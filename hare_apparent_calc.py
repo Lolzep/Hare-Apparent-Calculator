@@ -233,7 +233,7 @@ while i < flicker:
 
 # Preston's ETB triggers X amount of times and repeated Y amount of times (if preston_repeats > 0)
     if preston == True:
-        apparents += c_copies * (hare_repeats + 1)
+        apparents += c_copies * (preston_repeats + 1)
         if hare_repeats > 0:
             for j in range(hare_repeats+1):
                 rabbits += (c_copies) * (apparents + illusions - 1)
